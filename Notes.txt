@@ -5,10 +5,30 @@ Prerequisites :
 1 . Install terraform ( AWS Provider - auto with the tf template ) and AWS CLI 
     https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started
 2 . Create the User in the Required in the AWS Account. 
+3 . Create a Key pair in the AWS Console. and store key in Local for loggin in. 
 3 . Setup the CLI with the New User. 
+4 . cd terraform
+5 . terraform init
+6 . terraform fmt
+7 . terraform validate (Ignore network.tf - external ip error)
+8 . terraform plan -var-file=terraform.tfvars
+9. terraform apply -auto-approve
+
+# infrastructure is raised
+
+10 . terraform destroy -auto-approve
+
 
 Things to do later : 
 1 . Reduce the permissions of the tf user from the IAM. Elevated access for Initial Deployements.
 2 . Add backend for Terraform 
 3 . Modularize the Tf files (As a developement Created raw tf files)
 4 . Do the backend as s3 (Currently local tfstate storage) for the deployemnt to any account
+    Need to rerun terraform init after setting backend.
+5. add subnet /vpc/route table and nacl
+
+
+
+######### Random Stuff ############
+- .gitignore file ignores the files which not needed to be tracked. Can be used for code
+generated files. Builded artifacts.
