@@ -1,0 +1,14 @@
+######### NOTES WHILE Building the Project ############
+
+Prerequisites :
+
+1 . Install terraform ( AWS Provider - auto with the tf template ) and AWS CLI 
+    https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started
+2 . Create the User in the Required in the AWS Account. 
+3 . Setup the CLI with the New User. 
+
+Things to do later : 
+1 . Reduce the permissions of the tf user from the IAM. Elevated access for Initial Deployements.
+2 . Add backend for Terraform 
+3 . Modularize the Tf files (As a developement Created raw tf files)
+4 . Do the backend as s3 (Currently local tfstate storage) for the deployemnt to any account
