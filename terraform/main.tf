@@ -28,7 +28,13 @@ data "aws_ami" "ubuntu_base" {
 
 resource "aws_instance" "kubernetes-master" {
   ami           = data.aws_ami.ubuntu_base.image_id
-  instance_type = "t3.large"
+  instance_type = var.master_instance_type
+  key_name = var.aws_key_pair
+  vpc_security_group_ids = [aws_security_group.kub-master-sg.id]
+
+  root_block_device  {
+      volume_size = var.master_root_ebs_size
+  }
 
   tags = merge(
     var.default_tags,
@@ -41,7 +47,14 @@ resource "aws_instance" "kubernetes-master" {
 resource "aws_instance" "kubernetes-node" {
   count         = 2
   ami           = data.aws_ami.ubuntu_base.image_id
-  instance_type = "t3.medium"
+  instance_type = var.node_instance_type
+  key_name = var.aws_key_pair
+  vpc_security_group_ids = [aws_security_group.kub-node-sg.id]
+
+  root_block_device  {
+      volume_size = var.node_root_ebs_size
+
+  }
 
   tags = merge(
     var.default_tags,
