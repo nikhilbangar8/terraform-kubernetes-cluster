@@ -32,6 +32,8 @@ resource "aws_instance" "kubernetes-master" {
   key_name = var.aws_key_pair
   vpc_security_group_ids = [aws_security_group.kub-master-sg.id]
 
+  user_data = "${file("master_userdata.sh")}"
+
   root_block_device  {
       volume_size = var.master_root_ebs_size
   }
@@ -53,9 +55,10 @@ resource "aws_instance" "kubernetes-node" {
 
   root_block_device  {
       volume_size = var.node_root_ebs_size
-
   }
 
+  user_data = "${file("master_userdata.sh")}"
+  
   tags = merge(
     var.default_tags,
     {
